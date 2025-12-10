@@ -44,11 +44,34 @@
             border-bottom: 1px solid #eee;
         }
 
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .logo {
             font-size: 24px;
             font-weight: 700;
             color: #2563eb;
             text-decoration: none;
+        }
+
+        .login-btn {
+            padding: 10px 24px;
+            background: transparent;
+            color: #2563eb;
+            text-decoration: none;
+            border: 2px solid #2563eb;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #2563eb;
+            color: white;
         }
 
         /* Hero */
@@ -287,8 +310,9 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container header-content">
             <a href="/" class="logo">DesignFlow CRM</a>
+            <a href="https://app.designflowcrm.com" class="login-btn">Log In</a>
         </div>
     </header>
 
