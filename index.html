@@ -125,17 +125,116 @@
         .contact {
             padding: 80px 0;
             background: #f8fafc;
-            text-align: center;
         }
 
         .contact h2 {
             font-size: 32px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            text-align: center;
         }
 
-        .contact a {
-            color: #2563eb;
-            font-size: 20px;
+        .contact > .container > p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group.full-width {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 14px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-button:hover {
+            background: #1d4ed8;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .form-success h3 {
+            color: #059669;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .form-success p {
+            color: #666;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Footer */
@@ -222,8 +321,42 @@
     <section class="contact">
         <div class="container">
             <h2>Get in Touch</h2>
-            <p>Interested in learning more?</p>
-            <a href="mailto:todd@designflowcrm.com">todd@designflowcrm.com</a>
+            <p>Interested in learning more? Fill out the form below and we'll be in touch.</p>
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fname" name="fname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lname" name="lname" required>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+                <div class="form-success" id="form-success">
+                    <h3>Thank you!</h3>
+                    <p>We've received your message and will get back to you soon.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -238,5 +371,31 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                fname: document.getElementById('fname').value,
+                lname: document.getElementById('lname').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value
+            };
+
+            // The tracking script will auto-detect this form submission
+            // and create a lead in DesignFlow CRM
+
+            // Show success message
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('form-success').classList.add('show');
+
+            // Optional: Reset form for if user wants to submit again
+            this.reset();
+        });
+    </script>
 </body>
 </html>
